@@ -13,7 +13,10 @@ doKoMorph <- function(sentence){
     warning("input must be character!")
     return(sentence)
   }else{
-	  out <- .jcall(.jnew("Ko"), "[S", "KoAnalyze", sentence)
+    if(!exists("KoMorphObj", envir=KoNLP:::.KoNLPEnv)){
+      assign("KoMorphObj",.jnew("Ko"),KoNLP:::.KoNLPEnv)
+    }
+    out <- .jcall(get("KoMorphObj",envir=KoNLP:::.KoNLPEnv), "[S", "KoAnalyze", sentence)
     Encoding(out) <- "UTF-8"
     return(out)
   }
@@ -34,9 +37,12 @@ extractNoun <- function(sentence){
     warning("input must be character!")
     return(sentence)
   }else{
-	  out <- .jcall("HannanumInterface", "[S", "extractNoun",DicConfPath,sentence)
+    if(!exists("HannanumObj", envir=KoNLP:::.KoNLPEnv)){
+      assign("HannanumObj",.jnew("HannanumInterface"), KoNLP:::.KoNLPEnv)
+    }
+	out <- .jcall(get("HannanumObj",envir=KoNLP:::.KoNLPEnv), "[S", "extractNoun",DicConfPath,sentence)
     Encoding(out) <- "UTF-8"
-	  return(out)
+    return(out)
   } 
 }
 
@@ -55,9 +61,12 @@ MorphAnalyzer <- function(sentence){
     warning("input must be character!")
     return(sentence)
   }else{
-	  out <- .jcall("HannanumInterface", "S", "MorphAnalyzer",DicConfPath,sentence)
+    if(!exists("HannanumObj", envir=KoNLP:::.KoNLPEnv)){
+      assign("HannanumObj",.jnew("HannanumInterface"), KoNLP:::.KoNLPEnv)
+    }
+	out <- .jcall(get("HannanumObj",envir=KoNLP:::.KoNLPEnv), "S", "MorphAnalyzer",DicConfPath,sentence)
     Encoding(out) <- "UTF-8"
-	  return(makeTagList(out))
+    return(makeTagList(out))
   } 
 }
 #' SimplePos22 
@@ -75,9 +84,12 @@ SimplePos22 <- function(sentence){
     warning("input must be character!")
     return(sentence)
   }else{
-	  out <- .jcall("HannanumInterface", "S", "SimplePos22",DicConfPath,sentence)
+    if(!exists("HannanumObj", envir=KoNLP:::.KoNLPEnv)){
+      assign("HannanumObj",.jnew("HannanumInterface"), KoNLP:::.KoNLPEnv)
+    }
+	out <- .jcall(get("HannanumObj",envir=KoNLP:::.KoNLPEnv), "S", "SimplePos22",DicConfPath,sentence)
     Encoding(out) <- "UTF-8"
-	  return(makeTagList(out))
+    return(makeTagList(out))
   }
 }
 
@@ -96,9 +108,12 @@ SimplePos09 <- function(sentence){
     warning("input must be character!")
     return(sentence)
   }else{
-	  out <- .jcall("HannanumInterface", "S", "SimplePos09",DicConfPath,sentence)
+    if(!exists("HannanumObj", envir=KoNLP:::.KoNLPEnv)){
+      assign("HannanumObj",.jnew("HannanumInterface"), KoNLP:::.KoNLPEnv)
+    }
+	out <- .jcall(get("HannanumObj",envir=KoNLP:::.KoNLPEnv), "S", "SimplePos09",DicConfPath,sentence)
     Encoding(out) <- "UTF-8"
-	  return(makeTagList(out))
+	return(makeTagList(out))
   }
 }
 
