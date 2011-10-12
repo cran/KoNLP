@@ -36,7 +36,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## This codes can not be run if you don't have encoding system which can en/decode Hangul(ex) CP949, EUC-KR, UTF-8).  
+#' ## This codes can not be run 
+#' ##  if you don't have encoding system which can en/decode 
+#' ##  Hangul(ex) CP949, EUC-KR, UTF-8).  
 #' dicpath <- file.path(system.file(package="Sejong"), "dics", "handic.zip")
 #' conn <- unz(dicpath, file.path("data","kE","dic_user2.txt"))
 #' newdic <- read.table(conn, sep="\t", header=FALSE, fileEncoding="UTF-8", stringsAsFactors=FALSE)
@@ -107,6 +109,7 @@ convertTag <-function(fromTag, toTag, tag){
 #' Retrive Sejong dictionary to use in KoNLP
 #' 
 #' @param backup will backup current dictionary?
+#' @references \url{http://www.sejong.or.kr/}
 #' @export
 useSejongDic <- function(backup=T){
   useDic("Sejong", backup)
@@ -145,7 +148,9 @@ useSystemDic <- function(backup=T){
 #'
 #' @examples
 #' \dontrun{
-#' ## This codes can not be run if you don't have encoding system which can en/decode Hangul(ex) CP949, EUC-KR, UTF-8). 
+#' ## This codes can not be run 
+#' ##  if you don't have encoding system which can en/decode 
+#' ##  Hangul(ex) CP949, EUC-KR, UTF-8).  
 #' dicpath <- file.path(system.file(package="Sejong"), "dics", "handic.zip")
 #' conn <- unz(dicpath, file.path("data","kE","dic_user2.txt"))
 #' newdic <- read.table(conn, sep="\t", header=FALSE, fileEncoding="UTF-8", stringsAsFactors=FALSE)
@@ -188,7 +193,9 @@ backupUsrDic <- function(ask=TRUE){
 #'
 #' @examples
 #' \dontrun{
-#' ## This codes can not be run if you don't have encoding system which can en/decode Hangul(ex) CP949, EUC-KR, UTF-8). 
+#' ## This codes can not be run 
+#' ##  if you don't have encoding system which can en/decode 
+#' ##  Hangul(ex) CP949, EUC-KR, UTF-8).  
 #' dicpath <- file.path(system.file(package="Sejong"), "dics", "handic.zip")
 #' conn <- unz(dicpath, file.path("data","kE","dic_user2.txt"))
 #' newdic <- read.table(conn, sep="\t", header=FALSE, fileEncoding="UTF-8", stringsAsFactors=FALSE)
@@ -233,7 +240,9 @@ restoreUsrDic <- function(ask=TRUE){
 #'
 #' @examples
 #' \dontrun{
-#' ## This codes can not be run if you don't have encoding system which can en/decode Hangul(ex) CP949, EUC-KR, UTF-8). 
+#' ## This codes can not be run 
+#' ##  if you don't have encoding system which can en/decode 
+#' ##  Hangul(ex) CP949, EUC-KR, UTF-8).  
 #' dicpath <- file.path(system.file(package="Sejong"), "dics", "handic.zip")
 #' conn <- unz(dicpath, file.path("data","kE","dic_user2.txt"))
 #' newdic <- read.table(conn, sep="\t", header=FALSE, fileEncoding="UTF-8", stringsAsFactors=FALSE)

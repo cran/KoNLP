@@ -23,11 +23,21 @@
 
 
 .onLoad <- function(libname, pkgname) {
-  ret <- .jinit(parameters="-Dfile.encoding=UTF-8")
-  if(ret < 0){
-    stop("Could not create VM.")
+  initopt <- c("-Xmx512m", "-Dfile.encoding=UTF-8")
+  jopt <- getOption("java.parameters")
+  if(is.null(jopt)){
+    options(java.parameters = initopt)
   }else{
-    packageStartupMessage("Java initialized.")
+    if(rJava:::.jniInitialized & !any(grepl("-Dfile\\.encoding=UTF-8", jopt, ignore.case=TRUE))){
+      warning("Please reload KoNLP first than any other packages based on rJava.\n
+              You can't use some functions if you don't.")
+    }
+    memjopt <- jopt[which(grepl("^-Xmx",jopt))]
+    if(length(memjopt) > 0){
+      options(java.parameters=c(memjopt, initopt[2]))
+    }else{
+      options(java.parameters=c(jopt, initopt))
+    }
   }
   .jpackage(pkgname, lib.loc = libname)
 }
