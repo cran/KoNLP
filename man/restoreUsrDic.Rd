@@ -1,14 +1,15 @@
-\name{reloadAllDic}
-\alias{reloadAllDic}
-\title{reload all Hannanum analyzer dictionary}
+\name{restoreUsrDic}
+\alias{restoreUsrDic}
+\title{use for restoring backuped dic_user.txt}
 \usage{
-  reloadAllDic()
+  restoreUsrDic(ask = TRUE)
+}
+\arguments{
+  \item{ask}{ask to confirm backup}
 }
 \description{
-  Mainly, user dictionary reloading for Hannanum Analyzer.
-  If you want to update user dictionary on
-  KoNLP_pkg_dir/inst/dics/data/kE/dic_user.txt, need to
-  execute this function after editing dic.
+  Utility function for restoring dic_user.txt file to
+  dictionary directory.
 }
 \examples{
 \dontrun{

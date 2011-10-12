@@ -1,3 +1,19 @@
+Version 0.7
+------------------------------------------------------------------------------
+  * new dictionary added which from Sejong projects
+  * added example 
+  * Set "dontrun" on example code because Windows encoding problems.
+  * Warning message may appear if system doesn't have Hangul encoding ability(no warning on UTF-8).
+
+
+Version 0.0-9.3
+------------------------------------------------------------------------------
+  * added user dictionary manage functions.
+  * to -Xmx1024m for big dictionary size
+  * supports JRE 1.5
+
+
+
 Version 0.0-9.2 
 ------------------------------------------------------------------------------
   * add is.jamo() and fix is.hangul()  

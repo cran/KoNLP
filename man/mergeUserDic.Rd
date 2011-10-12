@@ -1,14 +1,18 @@
-\name{reloadAllDic}
-\alias{reloadAllDic}
-\title{reload all Hannanum analyzer dictionary}
+\name{mergeUserDic}
+\alias{mergeUserDic}
+\title{"dic_user.txt" merging function}
 \usage{
-  reloadAllDic()
+  mergeUserDic(newUserDic, append = TRUE, verbose = FALSE)
+}
+\arguments{
+  \item{newUserDic}{new user dictionary as data.frame}
+
+  \item{append}{append or replacing}
+
+  \item{verbose}{see detail error logs}
 }
 \description{
-  Mainly, user dictionary reloading for Hannanum Analyzer.
-  If you want to update user dictionary on
-  KoNLP_pkg_dir/inst/dics/data/kE/dic_user.txt, need to
-  execute this function after editing dic.
+  merging current dic_user.txt with new dictionary.
 }
 \examples{
 \dontrun{
