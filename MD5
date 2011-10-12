@@ -1,9 +1,9 @@
-0be6c167d37644b6eb330078d534eee9 *DESCRIPTION
-1849290586af3507832b3a7c52d356a0 *NAMESPACE
-d543bd96fbb71a5e49f9455e2730c75e *NEWS
+bf349daf77379d9f4c7ab7a156b48fb9 *DESCRIPTION
+fefb22130466065147d97e2cbd7e0989 *NAMESPACE
+cd4e21f24fbdbc3f5fa29f9ae950a3d2 *NEWS
 1c0f847119d6f9663fc013bf5c311401 *R/hangulUtils.R
 f6e828e79f6785c8bbcc51e2cb7197ff *R/koAnalyzerRun.R
-7fd496d39bd0c4d24075a890e2c69117 *R/manageDic.R
+1c6bbb534d4ec04ba4ee0240ea3f367c *R/manageDic.R
 6c201c4f3e4684324f5f6356a66c4d0b *R/onLoad.R
 f668c4d7d3604dcccf3fd295c80d4866 *R/sysdata.rda
 4a9652b48d4364f82bcc2f0279131d5b *R/tagdata.R
@@ -11,7 +11,7 @@ f668c4d7d3604dcccf3fd295c80d4866 *R/sysdata.rda
 f668c4d7d3604dcccf3fd295c80d4866 *data/tagdata.rda
 95308bdf9ea093361da35b9ab74482df *inst/java/jhannanum.jar
 972c3b8fb2cc26008cbceb01ff889ec4 *inst/java/junit-4.10.jar
-15aa06b0abb2ad433b470bec8aa0e427 *inst/java/ko.jar
+eb40e7108f927689ca016c7ee00a7ba6 *inst/java/ko.jar
 23af6bfbae664b915247f934a83670ba *inst/java/koreananalyzer-20100525.jar
 996d8b56508311b1ddcf4575ab73081c *inst/java/lucene-core-2.9.4.jar
 df1b6e4c91e5ae640bf47c22d6678246 *inst/java/lucene-spellchecker-2.9.4.jar
@@ -36,6 +36,7 @@ e2e56f56aef7ca69cfe987433b59fc0c *man/is.hangul.Rd
 f3f4233344ed7e6d495e85d161a9404b *man/mergeUserDic.Rd
 082af7937b55f15d993a06151777017e *man/reloadAllDic.Rd
 0dc6e896487bfe98fcde0aab7dfed457 *man/restoreUsrDic.Rd
+1c96824576d0139ab9a7266a3402f825 *man/statDic.Rd
 081c54c58796f83c83a873d24b30575e *man/tags.Rd
 bc7658c9d5864b3440e8c22cd38a1234 *man/useSejongDic.Rd
 f042b51f3d19e775c6c2ab4849631187 *man/useSystemDic.Rd
