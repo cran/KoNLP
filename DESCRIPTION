@@ -3,17 +3,14 @@ Maintainer: Heewon Jeon <madjakarta@gmail.com>
 License: GPL-3
 Title: Korean NLP Package
 Author: Heewon Jeon
-Description: Korean Language Processing, An interface to Hannanum korean
-    analyzer.(http://semanticweb.kaist.ac.kr/home/index.php/HanNanum), An
-    interface to Korean Lucene
-    analyzer.(http://sourceforge.net/projects/lucenekorean/). And some other
-    functions.
+Description: Korean language processing package. Morphlogical analyzer,
+        POS tagger, Keystroke converter, Hangul automata...
 SystemRequirements: Java (>= 1.6)
 URL: https://github.com/haven-jeon/KoNLP
-Version: 0.0-9.0
+Version: 0.0-9.2
 Repository: CRAN
-Date/Publication: 2012-01-05 01:39:08
-Packaged: 2012-01-05 00:13:10 UTC; gogamza
+Date/Publication: 2012-02-10 08:36:24
+Packaged: 2012-02-10 07:26:47 UTC; gogamza
 Date: 2011-10-12
 Encoding : UTF-8
 Depends: R (>= 2.14.0), rJava (>= 0.9-0), bitops (>= 1.0)

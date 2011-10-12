@@ -1,6 +1,6 @@
 \name{detectInputEncoding}
 \alias{detectInputEncoding}
-\title{detectInputEncoding}
+\title{Rough encoding detection function}
 \usage{
   detectInputEncoding(charinput)
 }
@@ -12,6 +12,6 @@
 }
 \description{
   function to be used for file or raw vector encodoing
-  detection.
+  detection. This is for internal use.
 }
 
