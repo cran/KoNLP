@@ -16,34 +16,19 @@
 #along with JHanNanum.  If not, see <http://www.gnu.org/licenses/>
 
 
-
-.KoNLPEnv <- new.env()
-
-
-#' .onLoad
-#' 
-#' package loader
+#' reloadAllDic
 #'
-#' @param libname name of library
-#' @param pkgname name of package 
-#' @rdname onLoad
-#' @import "rJava"
-.onLoad <- function(libname, pkgname) {
-  .jinit(parameters=c("-Dfile.encoding=UTF-8", "-Xmx512m"))
-  .jpackage(pkgname, lib.loc = libname)
-}
-
-
-
-.onAttach <- function(libname, pkgname){
-  DicConfPath <- paste(system.file(package=pkgname),"/dics", sep="")
-  UserDic <- paste(system.file(package=pkgname),"/dics/data/kE/dic_user.txt", sep="")
-  if(!file.exists(UserDic)){ 
-    warning(sprintf("%s does not exist!\n", UserDic))
+#' Mainly, user dictionary reloading for Hannanum Analyzer. 
+#' If you want to update uer dictionary on KoNLP_pkg_dir/inst/dics/data/kE/dic_user.txt, need to execute this function after editing dic.
+#'
+#' @export
+reloadAllDic <- function(){
+  if(!exists("HannanumObj", envir=KoNLP:::.KoNLPEnv)){
+    assign("HannanumObj",.jnew("HannanumInterface"),KoNLP:::.KoNLPEnv)
   }
-  assign("DicConfPath", DicConfPath, KoNLP:::.KoNLPEnv)
-  assign("UserDic", UserDic, KoNLP:::.KoNLPEnv)
+  .jcall(get("HannanumObj",envir=KoNLP:::.KoNLPEnv), , "reloadAllDic")
 }
+
 
 
 
