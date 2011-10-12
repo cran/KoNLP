@@ -16,6 +16,14 @@
 #along with JHanNanum.  If not, see <http://www.gnu.org/licenses/>   
 
 
+preprocessing <- function(inputs){
+  newInput <- gsub("[[:space:]]", " ", inputs)
+  if(nchar(newInput) > 20 & length(strsplit(newInput, " ")[[1]]) <= 3){ 
+    stop(sprintf("It's not kind of right sentence : '%s'", inputs))
+  }
+  return(newInput)
+}
+
 
 checkEncoding <- function(inputs){
   if(Encoding(inputs) == "unknown"){
@@ -74,6 +82,7 @@ extractNoun <- function(sentence){
   if(!is.character(sentence) | nchar(sentence) == 0) {
     stop("Input must be legitimate character!")
   }else{
+    sentence <- preprocessing(sentence)
     if(!exists("HannanumObj", envir=KoNLP:::.KoNLPEnv)){
       assign("HannanumObj",.jnew("HannanumInterface"), KoNLP:::.KoNLPEnv)
     }
@@ -101,6 +110,7 @@ MorphAnalyzer <- function(sentence){
   if(!is.character(sentence) | nchar(sentence) == 0) {
     stop("Input must be legitimate character!")
   }else{
+    sentence <- preprocessing(sentence)
     if(!exists("HannanumObj", envir=KoNLP:::.KoNLPEnv)){
       assign("HannanumObj",.jnew("HannanumInterface"), KoNLP:::.KoNLPEnv)
     }
@@ -126,6 +136,7 @@ SimplePos22 <- function(sentence){
   if(!is.character(sentence) | nchar(sentence) == 0) {
     stop("Input must be legitimate character!")
   }else{
+    sentence <- preprocessing(sentence)
     if(!exists("HannanumObj", envir=KoNLP:::.KoNLPEnv)){
       assign("HannanumObj",.jnew("HannanumInterface"), KoNLP:::.KoNLPEnv)
     }
@@ -153,6 +164,7 @@ SimplePos09 <- function(sentence){
   if(!is.character(sentence) | nchar(sentence) == 0) {
     stop("Input must be legitimate character!")
   }else{
+    sentence <- preprocessing(sentence)
     if(!exists("HannanumObj", envir=KoNLP:::.KoNLPEnv)){
       assign("HannanumObj",.jnew("HannanumInterface"), KoNLP:::.KoNLPEnv)
     }
@@ -174,6 +186,10 @@ SimplePos09 <- function(sentence){
 #' 
 #' @export
 is.hangul <- function(sentenceU8){
+  if(!(Encoding(sentenceU8) == "UTF-8" | 
+    (localeToCharset()[1] == "UTF-8" & Encoding(sentenceU8) == "unknown" ))){
+    stop("Input must be 'UTF-8' encoding!")
+  }
   intVec <- unlist(lapply(sentenceU8,utf8ToInt)) 
   res <- sapply(intVec, function(ch){
         .jcall("org/apache/lucene/search/spell/korean/KoHangul", "Z", "isHangul", .jchar(ch))
@@ -193,6 +209,10 @@ is.hangul <- function(sentenceU8){
 #' 
 #' @export
 is.jamo <- function(sentenceU8){
+  if(!(Encoding(sentenceU8) == "UTF-8" | 
+    (localeToCharset()[1] == "UTF-8" & Encoding(sentenceU8) == "unknown" ))){
+    stop("Input must be 'UTF-8' encoding!")
+  }
   intVec <- unlist(lapply(sentenceU8,utf8ToInt)) 
   res <- sapply(intVec, function(ch){
         .jcall("org/apache/lucene/search/spell/korean/KoHangul", "Z", "isJamo", .jchar(ch))

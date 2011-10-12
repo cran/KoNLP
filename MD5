@@ -1,10 +1,10 @@
-f31e0306841d8ff18d1757ce431623e0 *DESCRIPTION
-b06a58138b738f616084cc6ea9f7fd6a *NAMESPACE
-66f919428bc549dc1ff72630cc1b6401 *NEWS
-dc47282e3584f7781281039dbc35ac1d *R/KoAnalyzerRun.R
-496466b19ff0eb8e1d6add34a672cebb *R/manageDic.R
-a37b3a6459467c44ac44d94937d7a811 *R/onLoad.R
-9262a7a042ec71171df064c5e166977b *R/sysdata.rda
+9b2ede4eb34b4b17cfb5573d08715eeb *DESCRIPTION
+e739af8c8a77a75f467c5a238a12a9b8 *NAMESPACE
+02dccc0c7c192671d48dd5711edf003c *NEWS
+21b76bd6d0ad78388d081829b110395a *R/KoAnalyzerRun.R
+3b40a32ba42cdb8589b44624191d4b26 *R/manageDic.R
+935922b2a623aab4afff3a97f3569f11 *R/onLoad.R
+d126438a723842d6246e9c8f3908060d *R/sysdata.rda
 abd20642d16bf426587dc82cfc459d41 *inst/dics/conf/plugin/MajorPlugin/MorphAnalyzer/ChartMorphAnalyzer.json
 22b0a6923fdac96117c5d5350e3eb3c5 *inst/dics/conf/plugin/MajorPlugin/PosTagger/HmmPosTagger.json
 cba64293ae30c55824a6f91cd0f2faa5 *inst/dics/conf/plugin/SupplementPlugin/MorphemeProcessor/SimpleMAResult09.json
