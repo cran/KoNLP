@@ -1,10 +1,10 @@
-bab7cbfc636cf1d2066a8df773a8af6e *DESCRIPTION
+bb7a7f1d54d81d50097e691f584c8562 *DESCRIPTION
 1849290586af3507832b3a7c52d356a0 *NAMESPACE
-4f94069322589cb32ad4e04656b0d955 *NEWS
-9097b2c4ac4ac2ecb3021c07131153d6 *R/hangulUtils.R
+8a195b6d9df59eb2d4b125fa7f6ef4af *NEWS
+65a67a164a078bfccf2dae269ae843c3 *R/hangulUtils.R
 0cc1473d01d40e9d4eb159532b1e8c62 *R/koAnalyzerRun.R
-5841ec83fa3f2432428dfcdf2d062d8d *R/manageDic.R
-33bce25145d2a9dfa21ff211b5fa8673 *R/onLoad.R
+7fd496d39bd0c4d24075a890e2c69117 *R/manageDic.R
+2f8016b9e1fdf7870d016e601aa24221 *R/onLoad.R
 f668c4d7d3604dcccf3fd295c80d4866 *R/sysdata.rda
 4a9652b48d4364f82bcc2f0279131d5b *R/tagdata.R
 7d43da5a730f41e8497c5d879c601d5b *README.md
@@ -21,7 +21,7 @@ d940cc770a8ed7a67d4ac7be77922f77 *man/MorphAnalyzer.Rd
 18269fbaff8a67e3b49e76f4eb0c2d3d *man/SimplePos09.Rd
 2e451944b6360d65b7d24561045dc5bb *man/SimplePos22.Rd
 a2867bef3443b5e3c0d1010b81a2823f *man/StoK.Rd
-fd2b100e2f07c14373ad3638785a163b *man/backupUsrDic.Rd
+506b4d5d6c18145e139f53275e2b833c *man/backupUsrDic.Rd
 604ddad7318948cc169ca8dda51c8413 *man/convertHangulStringToJamos.Rd
 ff5ba0c7a9b57484ff6aebc4c1d3d0c1 *man/convertHangulStringToKeyStrokes.Rd
 5a9d0f221e22199d466feb865ef95c70 *man/convertTag.Rd
@@ -33,9 +33,9 @@ e2e56f56aef7ca69cfe987433b59fc0c *man/is.hangul.Rd
 11c6f5432951c65fae8db8f524b2c89b *man/is.jaeum.Rd
 034bdfdd147716d08eca54fd5598197d *man/is.jamo.Rd
 834e56e5e6ce0ade72db3955b307f8f7 *man/is.moeum.Rd
-ccc3367a805c2006d99f5f3bbb8c55f8 *man/mergeUserDic.Rd
-3c749c25c825cc287fa6d632cf6ad192 *man/reloadAllDic.Rd
-d8badfb759b53d4605ce837af967d795 *man/restoreUsrDic.Rd
+f3f4233344ed7e6d495e85d161a9404b *man/mergeUserDic.Rd
+082af7937b55f15d993a06151777017e *man/reloadAllDic.Rd
+0dc6e896487bfe98fcde0aab7dfed457 *man/restoreUsrDic.Rd
 081c54c58796f83c83a873d24b30575e *man/tags.Rd
 bc7658c9d5864b3440e8c22cd38a1234 *man/useSejongDic.Rd
 f042b51f3d19e775c6c2ab4849631187 *man/useSystemDic.Rd

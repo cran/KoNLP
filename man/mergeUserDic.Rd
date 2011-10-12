@@ -1,8 +1,9 @@
 \name{mergeUserDic}
 \alias{mergeUserDic}
-\title{"dic_user.txt" merging function}
+\title{appending or replacing with new data.frame}
 \usage{
-  mergeUserDic(newUserDic, append = TRUE, verbose = FALSE)
+  mergeUserDic(newUserDic, append = TRUE, verbose = FALSE,
+    ask = FALSE)
 }
 \arguments{
   \item{newUserDic}{new user dictionary as data.frame}
@@ -10,15 +11,18 @@
   \item{append}{append or replacing}
 
   \item{verbose}{see detail error logs}
+
+  \item{ask}{ask to backup}
 }
 \description{
-  merging current dic_user.txt with new dictionary.
+  appending new dictionary to current dictionary.
+  replaceing current dictionary with new dictionary.
 }
 \examples{
 \dontrun{
 ## This codes can not be run if you don't have encoding system which can en/decode Hangul(ex) CP949, EUC-KR, UTF-8).
-dicpath <- paste(system.file(package="Sejong"), "/dics/handic.zip", sep="")
-conn <- unz(dicpath, "data/kE/dic_user2.txt")
+dicpath <- file.path(system.file(package="Sejong"), "dics", "handic.zip")
+conn <- unz(dicpath, file.path("data","kE","dic_user2.txt"))
 newdic <- read.table(conn, sep="\\t", header=FALSE, fileEncoding="UTF-8", stringsAsFactors=FALSE)
 mergeUserDic(newdic)
 ## backup merged new dictionary
