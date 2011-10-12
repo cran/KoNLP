@@ -63,12 +63,11 @@ public class KoKeystrokeAutomata extends KoHangulAutomata {
 					// assert(len == 1);
 					if (len == 1) {
 						char trymul[] = new char[10];
-						trymul[0] = jong.charAt(0);
-						trymul[1] = ch;
-						trymul[2] = '\0';
-						if (KoHangul.isInKeyCode(new String(trymul))) {
-							jongSung = KoHangul.getCodefromKey(new String(
-									trymul)); // can be multi jongsung
+						System.arraycopy(jong.toCharArray(), 0, trymul, 0, jong.length());
+						trymul[jong.length()] = ch;
+						String strTrymul = new String(trymul, 0, jong.length() + 1);
+						if (KoHangul.isInKeyCode(strTrymul)) {
+							jongSung = KoHangul.getCodefromKey(strTrymul); // can be multi jongsung
 						} else {
 							pushcomp();
 							choSung = code;
@@ -87,14 +86,11 @@ public class KoKeystrokeAutomata extends KoHangulAutomata {
 					} else { // jongsung 0 jwungsung 1
 						char trymul[] = new char[10];
 						String jwung = KoHangul.getKeyfromCode(jwungSung);
-						System.arraycopy(jwung.toCharArray(), 0, trymul, 0,
-								jwung.length());
+						System.arraycopy(jwung.toCharArray(), 0, trymul, 0, jwung.length());
 						trymul[jwung.length()] = ch;
-						trymul[jwung.length() + 1] = '\0';
-						if (KoHangul.isInKeyCode(new String(trymul))) { // multi
-																		// jwungsung
-							jwungSung = KoHangul.getCodefromKey(new String(
-									trymul));
+						String strTrymul = new String(trymul, 0, jwung.length() + 1);
+						if (KoHangul.isInKeyCode(strTrymul)) { // multi jwungsung
+							jwungSung = KoHangul.getCodefromKey(strTrymul);
 						} else {
 							pushcomp();
 							jwungSung = code;
@@ -106,13 +102,10 @@ public class KoKeystrokeAutomata extends KoHangulAutomata {
 					assert ((jongLen) > 0 && (jongLen < 3)); // must be 1 or 2
 																// char
 					if (jongLen > 1) {
-						final char strF[] = { jong.charAt(0), '\0' };
-						char ojong = KoHangul.getCodefromKey(new String(strF)); // ㄴㅎ
-																				// ->
-																				// ㄴ
-																				// ㅎ
-						final char strS[] = { jong.charAt(1), '\0' };
-						char ncho = KoHangul.getCodefromKey(new String(strS));
+						final char strF[] = { jong.charAt(0)};
+						char ojong = KoHangul.getCodefromKey(new String(strF, 0, 1)); 
+						final char strS[] = { jong.charAt(1)};
+						char ncho = KoHangul.getCodefromKey(new String(strS, 0, 1));
 						jongSung = ojong;
 						pushcomp();
 						choSung = ncho;
@@ -136,9 +129,9 @@ public class KoKeystrokeAutomata extends KoHangulAutomata {
 
 	public static void main(String[] args) {
 		KoHangulAutomata am = new KoKeystrokeAutomata(false);
-		System.out.println(am.convert("rjatordpswls"));
+		System.out.println(am.convert("wjsgmldnjsdkfa"));
 		am.clear();
-		System.out.println(am.convert("sksms wjdakf glaemfdj"));
+		//System.out.println(am.convert("sksms wjdakf glaemfdj"));
 	}
 
 }

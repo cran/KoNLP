@@ -182,13 +182,13 @@ public class KoHangul {
 			put("ㄹㅍ", (char) 0x313f);
 			put("ㄹㅎ", (char) 0x3140);
 			put("ㅂㅅ", (char) 0x3144);
-			put("ㅘ", (char) 0x3158);
-			put("ㅙ", (char) 0x3159);
-			put("ㅚ", (char) 0x315a);
-			put("ㅝ", (char) 0x315d);
-			put("ㅞ", (char) 0x315e);
-			put("ㅟ", (char) 0x315f);
-			put("ㅢ", (char) 0x3162);
+			put("ㅗㅏ", (char) 0x3158);
+			put("ㅗㅐ", (char) 0x3159);
+			put("ㅗㅣ", (char) 0x315a);
+			put("ㅜㅓ", (char) 0x315d);
+			put("ㅜㅔ", (char) 0x315e);
+			put("ㅜㅣ", (char) 0x315f);
+			put("ㅡㅣ", (char) 0x3162);
 			put("", (char) 0);
 		}
 	};
@@ -425,18 +425,21 @@ public class KoHangul {
 	}
 
 	protected static final String convertHangulStringToKeyStrokes(
-			final String origSyllables, boolean div) {
+			final String origSyllables, boolean isFullwidth, boolean div) {
 		char keystrokes[] = new char[origSyllables.length() * 6];
 		int keyIdx = 0;
 		for (int i = 0; i < origSyllables.length(); i++) {
 			if (isHangul(origSyllables.charAt(i))) {
-				char[] jamos = convertHangulSyllableToJamo(origSyllables
-						.charAt(i));
+				char[] jamos = convertHangulSyllableToJamo(origSyllables.charAt(i));
 				for (char jamo : jamos) {
 					char keys[] = getKeyfromCode(jamo).toCharArray();
 					char fwKeys[] = new char[keys.length];
 					for (int j = 0; j < keys.length; j++) {
-						fwKeys[j] = convertHalfwidthToFullwidth(keys[j]);
+						if(isFullwidth){
+							fwKeys[j] = convertHalfwidthToFullwidth(keys[j]);
+						}else{
+							fwKeys[j] = keys[j];
+						}
 					}
 					System.arraycopy(fwKeys, 0, keystrokes, keyIdx,
 							fwKeys.length);
