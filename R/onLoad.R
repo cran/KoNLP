@@ -23,11 +23,12 @@
 
 
 .onLoad <- function(libname, pkgname) {
-  tryCatch(.jinit(parameters=c("-Dfile.encoding=UTF-8", "-Xmx1024m")), 
-    error=function(e){
-      .jinit(parameters=c("-Dfile.encoding=UTF-8", getOption("java.parameters")))
-      packageStartupMessage("Your system doesn't have much memory to run KoNLP.\nTherefore, some dictionary managing functions will not work appropreately.")
-    },finally=packageStartupMessage("Java initialized.\n"))
+  ret <- .jinit(parameters="-Dfile.encoding=UTF-8")
+  if(ret < 0){
+    stop("Could not create VM.")
+  }else{
+    packageStartupMessage("Java initialized.")
+  }
   .jpackage(pkgname, lib.loc = libname)
 }
 

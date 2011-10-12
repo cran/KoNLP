@@ -1,4 +1,10 @@
-Version 0.76.6
+Version 0.76.8
+------------------------------------------------------------------------------
+  * remove deprecated functions.
+  * decreasing package size dramatically. 
+  * set Null on -Xmx to use JVM's default optimal parameters. 
+
+Version 0.76.7
 ------------------------------------------------------------------------------
   * function to view summary of dictionary using statDic().
   * fix bugs on SimplePosXX().

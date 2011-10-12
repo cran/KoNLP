@@ -18,28 +18,28 @@
 
 
 
-#' morphlogical analysis function for Hangul
-#' 
-#' morphlogical analyze the sentence uses lucene korean analyzer.
-#' Example will be shown in \href{https://github.com/haven-jeon/KoNLP/wiki}{github wiki}.
-#' 
-#' @param sentence input
-#' @return stem of sentence
-#'
-#' @export
-doKoMorph <- function(sentence){
-  warning("This function will be deprecated.\n We suggest 'MorphAnalyzer()' to use.")
-  if(!is.character(sentence) | nchar(sentence) == 0) {
-    stop("Input must be legitimate character!")
-  }else{
-    if(!exists("KoMorphObj", envir=KoNLP:::.KoNLPEnv)){
-      assign("KoMorphObj",.jnew("Ko"),KoNLP:::.KoNLPEnv)
-    }
-    out <- .jcall(get("KoMorphObj",envir=KoNLP:::.KoNLPEnv), "[S", "KoAnalyze", sentence)
-    Encoding(out) <- "UTF-8"
-    return(out)
-  }
-}
+# morphlogical analysis function for Hangul
+# 
+# morphlogical analyze the sentence uses lucene korean analyzer.
+# Example will be shown in \href{https://github.com/haven-jeon/KoNLP/wiki}{github wiki}.
+# 
+# @param sentence input
+# @return stem of sentence
+#
+# @export
+#doKoMorph <- function(sentence){
+#  warning("This function will be deprecated.\n We suggest 'MorphAnalyzer()' to use.")
+#  if(!is.character(sentence) | nchar(sentence) == 0) {
+#    stop("Input must be legitimate character!")
+#  }else{
+#    if(!exists("KoMorphObj", envir=KoNLP:::.KoNLPEnv)){
+#      assign("KoMorphObj",.jnew("Ko"),KoNLP:::.KoNLPEnv)
+#    }
+#    out <- .jcall(get("KoMorphObj",envir=KoNLP:::.KoNLPEnv), "[S", "KoAnalyze", sentence)
+#    Encoding(out) <- "UTF-8"
+#    return(out)
+#  }
+#}
 
 #' Noun extractor for Hangul
 #' 
@@ -57,7 +57,7 @@ extractNoun <- function(sentence){
     return(sentence)
   }
   if(!exists("HannanumObj", envir=KoNLP:::.KoNLPEnv)){
-    assign("HannanumObj",.jnew("HannanumInterface"), KoNLP:::.KoNLPEnv)
+    assign("HannanumObj",.jnew("kr/pe/freesearch/jhannanum/comm/HannanumInterface"), KoNLP:::.KoNLPEnv)
   }
 	out <- .jcall(get("HannanumObj",envir=KoNLP:::.KoNLPEnv), 
                 "[S", "extractNoun",get("SejongDicsZip", envir=KoNLP:::.KoNLPEnv),sentence_pre,
@@ -82,7 +82,7 @@ MorphAnalyzer <- function(sentence){
     return(sentence)
   }
   if(!exists("HannanumObj", envir=KoNLP:::.KoNLPEnv)){
-    assign("HannanumObj",.jnew("HannanumInterface"), KoNLP:::.KoNLPEnv)
+    assign("HannanumObj",.jnew("kr/pe/freesearch/jhannanum/comm/HannanumInterface"), KoNLP:::.KoNLPEnv)
   }
   out <- .jcall(get("HannanumObj",envir=KoNLP:::.KoNLPEnv),
                 "S", "MorphAnalyzer", get("SejongDicsZip", envir=KoNLP:::.KoNLPEnv),sentence_pre,
@@ -105,7 +105,7 @@ SimplePos22 <- function(sentence){
     return(sentence)
   }
   if(!exists("HannanumObj", envir=KoNLP:::.KoNLPEnv)){
-    assign("HannanumObj",.jnew("HannanumInterface"), KoNLP:::.KoNLPEnv)
+    assign("HannanumObj",.jnew("kr/pe/freesearch/jhannanum/comm/HannanumInterface"), KoNLP:::.KoNLPEnv)
   }
   out <- .jcall(get("HannanumObj",envir=KoNLP:::.KoNLPEnv), 
                 "S", "SimplePos22",get("SejongDicsZip", envir=KoNLP:::.KoNLPEnv),sentence_pre,
@@ -130,7 +130,7 @@ SimplePos09 <- function(sentence){
     return(sentence)
   }
   if(!exists("HannanumObj", envir=KoNLP:::.KoNLPEnv)){
-    assign("HannanumObj",.jnew("HannanumInterface"), KoNLP:::.KoNLPEnv)
+    assign("HannanumObj",.jnew("kr/pe/freesearch/jhannanum/comm/HannanumInterface"), KoNLP:::.KoNLPEnv)
   }
   out <- .jcall(get("HannanumObj",envir=KoNLP:::.KoNLPEnv), 
                 "S", "SimplePos09",get("SejongDicsZip", envir=KoNLP:::.KoNLPEnv),sentence_pre,
