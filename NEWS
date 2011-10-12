@@ -1,8 +1,13 @@
+Version 0.76.6
+------------------------------------------------------------------------------
+  * check more cases on raw input sentences
+  * secondary JVM option to default
+
 Version 0.76.5
 ------------------------------------------------------------------------------
   * fix path with platform independent way.
   * make more easy on mergeUserDic().  
-  * now support vector on 'is.~()' functions.
+  * now support vector on is.*()s.
 
 Version 0.76
 ------------------------------------------------------------------------------

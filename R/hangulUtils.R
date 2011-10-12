@@ -18,8 +18,15 @@
 
 # if unable to process, this will return FALSE
 preprocessing <- function(inputs){
+  if(!is.character(inputs)) {
+    warning("Input must be legitimate character!")
+    return(FALSE)
+  }
   newInput <- gsub("[[:space:]]", " ", inputs)
-  if(nchar(newInput) > 20 & length(strsplit(newInput, " ")[[1]]) <= 3){ 
+  newInput <- gsub("[[:space:]]+$", "", newInput)
+  newInput <- gsub("^[[:space:]]+", "", newInput)
+  if((nchar(newInput) == 0) |  
+          (nchar(newInput) > 20 & length(strsplit(newInput, " ")[[1]]) <= 1)){ 
     warning(sprintf("It's not kind of right sentence : '%s'", inputs))
     return(FALSE)
   }
