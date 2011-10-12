@@ -13,11 +13,13 @@
 #GNU General Public License for more details.
 #
 #You should have received a copy of the GNU General Public License
-#along with JHanNanum.  If not, see <http://www.gnu.org/licenses/>
+#along with KoNLP.  If not, see <http://www.gnu.org/licenses/>
 
 
 
 .KoNLPEnv <- new.env()
+
+.DicPkgName <- "Sejong"
 
 
 .onLoad <- function(libname, pkgname) {
@@ -32,9 +34,19 @@
 
 
 .onAttach <- function(libname, pkgname){
-  DicConfPath <- paste(system.file(package=pkgname),"/dics", sep="")
+  #uncompress Sejong Hannanum dictionary, if necessary
+  dicpath <- paste(system.file(package=.DicPkgName),"/dics/", sep="")
+  dics <- paste(dicpath,"handic.zip", sep="")
+  if(file.exists(dics)){
+    unzip(dics,exdir=dicpath,list=F, overwrite=T)
+    file.remove(dics)
+    packageStartupMessage("Successfully uncompressed Sejong package dictionaries.\n")
+  }
+
+
+  DicConfPath <- paste(system.file(package=.DicPkgName),"/dics", sep="")
   DicUser <- "dic_user.txt"
-  UserDicPath <- paste(system.file(package=pkgname),"/dics/data/kE/", sep="")
+  UserDicPath <- paste(system.file(package=.DicPkgName),"/dics/data/kE/", sep="")
   UserDic <- paste(UserDicPath, DicUser, sep="")
   if(!file.exists(UserDic)){ 
     stop(sprintf("%s does not exist!\nRe-install KoNLP package.\n", UserDic))
