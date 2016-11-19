@@ -2,10 +2,10 @@
 #
 #This file is part of KoNLP.
 #
-#KoNLP is free software: you can redistribute it and/or modify
-#it under the terms of the GNU General Public License as published by
-#the Free Software Foundation, either version 3 of the License, or
-#(at your option) any later version.
+#KoNLP is free software: you can redistribute it and/or modify it under the
+#terms of the GNU General Public License as published by the Free Software
+#Foundation, either version 3 of the License, or (at your option) any later
+#version.
 
 #KoNLP is distributed in the hope that it will be useful,
 #but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -21,29 +21,54 @@
 
 .DicPkgName <- "Sejong"
 
+.ScalaVer <- '2.11.8'
+
 
 .onLoad <- function(libname, pkgname) {
-  initopt <- c("-Xmx512m", "-Dfile.encoding=UTF-8")
+  #scala runtime install on-the-fly 
+  scala_path <- file.path(system.file(package="KoNLP"),"java", 
+                  sprintf("scala-library-%s.jar", .ScalaVer))
+  if(file.exists(scala_path) == FALSE | file.size(scala_path) <= 3072){
+      scala_library_install(.ScalaVer)
+  }
+  initopt <- c("-Xmx768m", "-Dfile.encoding=UTF-8")
   jopt <- getOption("java.parameters")
   if(is.null(jopt)){
     options(java.parameters = initopt)
   }else{
-    if(rJava:::.jniInitialized & !any(grepl("-Dfile\\.encoding=UTF-8", jopt, ignore.case=TRUE))){
-      warning("Please reload KoNLP first than any other packages based on rJava.\n
-              You can't use some functions if you don't.")
+    if(rJava::.jniInitialized & !any(grepl("-Dfile\\.encoding=UTF-8", jopt, ignore.case=TRUE))){
+      stop("You cann't parse resource files based on UTF-8 on rJava. Please reload KoNLP first than any other packages connected with rJava.")
     }
     memjopt <- jopt[which(grepl("^-Xmx",jopt))]
+    
     if(length(memjopt) > 0){
-      options(java.parameters=c(memjopt, initopt[2]))
+      memsize <- tolower(gsub("^-Xmx", "", memjopt))
+      memunit <- gsub("[[:digit:]]","",memsize)
+      memnum <-  gsub("[m|g]$","",memsize)
+       
+      if(memunit == 'g'){
+        memsizemega <- as.numeric(memnum) * 1024
+      }else{
+        memsizemega <- as.numeric(memnum)
+      }
+      if(memsizemega < 768){
+        options(java.parameters=c(initopt[1], initopt[2]))
+      }else{
+        options(java.parameters=c(memjopt, initopt[2])) 
+      }
     }else{
       options(java.parameters=c(jopt, initopt))
     }
   }
+
   .jpackage(pkgname, lib.loc = libname)
 }
 
 
 
+
+#' @importFrom utils localeToCharset
+#' @import Sejong
 .onAttach <- function(libname, pkgname){
   DicConfPath <- file.path(system.file(package=.DicPkgName),"dics")
   dics <- file.path(DicConfPath,"handic.zip")
@@ -67,22 +92,24 @@
 
     if(ret != T && ret2 != T){
       warning(sprintf("Could not create %s\n", DicUser))
-      assign("CopyedUserDic", FALSE, KoNLP:::.KoNLPEnv)
+      assign("CopyedUserDic", FALSE, .KoNLPEnv)
     }
-    assign("CopyedUserDic", TRUE, KoNLP:::.KoNLPEnv)
+    assign("CopyedUserDic", TRUE, .KoNLPEnv)
   }else{
     packageStartupMessage("Checking user defined dictionary!\n")
-    assign("CopyedUserDic", TRUE, KoNLP:::.KoNLPEnv)
+    assign("CopyedUserDic", TRUE, .KoNLPEnv)
   }
-  assign("DicRelPath", UserDic, KoNLP:::.KoNLPEnv)
-  assign("SejongDicPath", DicConfPath, KoNLP:::.KoNLPEnv)
-  assign("UserDicPathinSejongZip", UserDic, KoNLP:::.KoNLPEnv)
-  assign("CurrentUserDic", currentUserDic, KoNLP:::.KoNLPEnv)
-  assign("CurrentUserDicPath", CurrentUserDicPath, KoNLP:::.KoNLPEnv)
-  assign("SejongDicsZip", dics, KoNLP:::.KoNLPEnv)
-  assign("backupUserDicPath", backupUserDicPath, KoNLP:::.KoNLPEnv)
-  assign("backupUserDic", file.path(backupUserDicPath,DicUser), KoNLP:::.KoNLPEnv)
+  assign("DicRelPath", UserDic, .KoNLPEnv)
+  assign("SejongDicPath", DicConfPath, .KoNLPEnv)
+  assign("UserDicPathinSejongZip", UserDic, .KoNLPEnv)
+  assign("CurrentUserDic", currentUserDic, .KoNLPEnv)
+  assign("CurrentUserDicPath", CurrentUserDicPath, .KoNLPEnv)
+  assign("SejongDicsZip", dics, .KoNLPEnv)
+  assign("backupUserDicPath", backupUserDicPath, .KoNLPEnv)
+  assign("backupUserDic", file.path(backupUserDicPath,DicUser), .KoNLPEnv)
+  assign("ScalaVer", .ScalaVer, .KoNLPEnv)
 
+  
   if(all((localeToCharset()[1] == c("UTF-8", "CP949", "EUC-KR")) == FALSE)){
     packageStartupMessage("This R shell doesn't contain any Hangul encoding.\nFor fully use, any of 'UTF-8', 'CP949', 'EUC-KR' needs to be used for R shell encoding.")
   }

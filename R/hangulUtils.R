@@ -2,10 +2,10 @@
 #
 #This file is part of KoNLP.
 #
-#KoNLP is free software: you can redistribute it and/or modify
-#it under the terms of the GNU General Public License as published by
-#the Free Software Foundation, either version 3 of the License, or
-#(at your option) any later version.
+#KoNLP is free software: you can redistribute it and/or modify it under the
+#terms of the GNU General Public License as published by the Free Software
+#Foundation, either version 3 of the License, or (at your option) any later
+#version.
 
 #KoNLP is distributed in the hope that it will be useful,
 #but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -17,6 +17,7 @@
 
 
 # if unable to process, this will return FALSE
+# this function will be removed because InformalSentenceFilter will do this job.
 preprocessing <- function(inputs){
   if(!is.character(inputs)) {
     warning("Input must be legitimate character!")
@@ -25,11 +26,11 @@ preprocessing <- function(inputs){
   newInput <- gsub("[[:space:]]", " ", inputs)
   newInput <- gsub("[[:space:]]+$", "", newInput)
   newInput <- gsub("^[[:space:]]+", "", newInput)
-  if((nchar(newInput) == 0) |  
-          (nchar(newInput) > 20 & length(strsplit(newInput, " ")[[1]]) <= 1)){ 
-    warning(sprintf("It's not kind of right sentence : '%s'", inputs))
-    return(FALSE)
-  }
+  # if((nchar(newInput) == 0) |  
+  #         (nchar(newInput) > 20 & length(strsplit(newInput, " ")[[1]]) <= 1)){ 
+  #   warning(sprintf("It's not kind of right sentence : '%s'", inputs))
+  #   return(FALSE)
+  # }
   return(newInput)
 }
 
@@ -311,18 +312,18 @@ HangulAutomata <- function(input, isKeystroke=F, isForceConv=F){
   
   #check whether keystroke input or Jamo
   if(isKeystroke){
-    if(!exists("KoKeystrokeAutomata", envir=KoNLP:::.KoNLPEnv)){
+    if(!exists("KoKeystrokeAutomata", envir=.KoNLPEnv)){
       assign("KoKeystrokeAutomata",.jnew("kr/pe/freesearch/korean/KoKeystrokeAutomata", isForceConv),
-             KoNLP:::.KoNLPEnv)
+             .KoNLPEnv)
     }
-    keyAuto <- get("KoKeystrokeAutomata",envir=KoNLP:::.KoNLPEnv)
+    keyAuto <- get("KoKeystrokeAutomata",envir=.KoNLPEnv)
     KoHangulAuto <- .jcast(keyAuto, "kr/pe/freesearch/korean/KoHangulAutomata")
   }else{
-    if(!exists("KoJamoAutomata", envir=KoNLP:::.KoNLPEnv)){
+    if(!exists("KoJamoAutomata", envir=.KoNLPEnv)){
       assign("KoJamoAutomata",.jnew("kr/pe/freesearch/korean/KoJamoAutomata", isForceConv),
-             KoNLP:::.KoNLPEnv)
+             .KoNLPEnv)
     }
-    JamoAuto <- get("KoJamoAutomata",envir=KoNLP:::.KoNLPEnv)
+    JamoAuto <- get("KoJamoAutomata",envir=.KoNLPEnv)
     KoHangulAuto <- .jcast(JamoAuto, "kr/pe/freesearch/korean/KoHangulAutomata")
   }
 
