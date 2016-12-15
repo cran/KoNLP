@@ -12,7 +12,7 @@
 
 <meta name="author" content="Heewon Jeon" />
 
-<meta name="date" content="2016-11-15" />
+<meta name="date" content="2016-12-14" />
 
 <title>Introduction to KoNLP API</title>
 
@@ -32,7 +32,7 @@
 
 <h1 class="title toc-ignore">Introduction to KoNLP API</h1>
 <h4 class="author"><em>Heewon Jeon</em></h4>
-<h4 class="date"><em>2016-11-15</em></h4>
+<h4 class="date"><em>2016-12-14</em></h4>
 
 
 
@@ -42,35 +42,29 @@
 <h1>Introduction to KoNLP API</h1>
 <div id="extractnoun" class="section level2">
 <h2>extractNoun</h2>
-<p>function for extract Nouns from sentences. Internally, runs pos tagger and only select Noun from set.</p>
+<p>function for extract Nouns from sentences. Internally, runs pos tagger and only select Nouns from set.</p>
 <pre><code>library(KoNLP)
 
-useSystemDic()
+## Checking user defined dictionary!
+
+useSejongDic()
 
 ## Backup was just finished!
-## 283949 words dictionary was built.
+## 370957 words dictionary was built.
 
 extractNoun(&quot;롯데마트가 판매하고 있는 흑마늘 양념 치킨이 논란이 되고 있다.&quot;)
 
-## [1] &quot;롯데마트가&quot; &quot;판매&quot;       &quot;흑마늘&quot;     &quot;양념&quot;       &quot;치킨&quot;      
-## [6] &quot;논란&quot;
+## [1] &quot;롯데마트&quot; &quot;판매&quot;     &quot;흑마늘&quot;   &quot;양념&quot;     &quot;치킨&quot;     &quot;논란&quot;
 
 sapply(c(&quot;R은 free 소프트웨어이고, [완전하게 무보증]입니다.&quot;, &quot;일정한 조건에 따르면, 자유롭게 이것을 재배포할수가 있습니다.&quot;), extractNoun)
 
-##      R은 free 소프트웨어이고, [완전하게 무보증]입니다.
-## [1,] &quot;R&quot;                                              
-## [2,] &quot;free&quot;                                           
-## [3,] &quot;소프트웨어&quot;                                     
-## [4,] &quot;완전&quot;                                           
-## [5,] &quot;무보&quot;                                           
-## [6,] &quot;증&quot;                                             
-##      일정한 조건에 따르면, 자유롭게 이것을 재배포할수가 있습니다.
-## [1,] &quot;일정&quot;                                                      
-## [2,] &quot;한&quot;                                                        
-## [3,] &quot;조건&quot;                                                      
-## [4,] &quot;자유&quot;                                                      
-## [5,] &quot;이것&quot;                                                      
-## [6,] &quot;재배포할수가&quot;</code></pre>
+## $`R은 free 소프트웨어이고, [완전하게 무보증]입니다.`
+## [1] &quot;R&quot;          &quot;free&quot;       &quot;소프트웨어&quot; &quot;완전&quot;       &quot;하게&quot;      
+## [6] &quot;무보&quot;       &quot;증&quot;        
+## 
+## $`일정한 조건에 따르면, 자유롭게 이것을 재배포할수가 있습니다.`
+## [1] &quot;일정&quot;         &quot;한&quot;           &quot;조건&quot;         &quot;자유&quot;        
+## [5] &quot;이것&quot;         &quot;재배포할수가&quot;</code></pre>
 </div>
 <div id="simplepos09" class="section level2">
 <h2>SimplePos09</h2>
@@ -79,7 +73,7 @@ sapply(c(&quot;R은 free 소프트웨어이고, [완전하게 무보증]입니�
 pos
 
 ## $롯데마트가
-## [1] &quot;롯데마트가/N&quot;
+## [1] &quot;롯데마트/N+가/J&quot;
 ## 
 ## $판매하고
 ## [1] &quot;판매/N+하고/J&quot;
@@ -110,7 +104,7 @@ pos
 
 pos$`롯데마트가`
 
-## [1] &quot;롯데마트가/N&quot;</code></pre>
+## [1] &quot;롯데마트/N+가/J&quot;</code></pre>
 </div>
 <div id="simplepos22" class="section level2">
 <h2>SimplePos22</h2>
@@ -118,7 +112,7 @@ pos$`롯데마트가`
 <pre><code>SimplePos22(&quot;롯데마트가 판매하고 있는 흑마늘 양념 치킨이 논란이 되고 있다.&quot;)
 
 ## $롯데마트가
-## [1] &quot;롯데마트가/NC&quot;
+## [1] &quot;롯데마트/NC+가/JC&quot;
 ## 
 ## $판매하고
 ## [1] &quot;판매/NC+하고/JC&quot;
@@ -153,8 +147,7 @@ pos$`롯데마트가`
 <pre><code>MorphAnalyzer(&quot;롯데마트가 판매하고 있는 흑마늘 양념 치킨이 논란이 되고 있다.&quot;)
 
 ## $롯데마트가
-## [1] &quot;롯데마트/ncn+가/jcc&quot; &quot;롯데마트/ncn+가/jcs&quot; &quot;롯데마트가/ncn&quot;     
-## [4] &quot;롯데마트/nqq+가/jcc&quot; &quot;롯데마트/nqq+가/jcs&quot; &quot;롯데마트가/nqq&quot;     
+## [1] &quot;롯데마트/ncn+가/jcc&quot; &quot;롯데마트/ncn+가/jcs&quot;
 ## 
 ## $판매하고
 ## [1] &quot;판매/ncpa+하고/jcj&quot;             &quot;판매/ncpa+하고/jct&quot;            
@@ -374,18 +367,9 @@ SimplePos22(&quot;성긴털제비꽃은 너무 예쁘다.&quot;)
 MorphAnalyzer(&quot;성긴털제비꽃은 너무 예쁘다.&quot;)
 
 ## $성긴털제비꽃은
-##  [1] &quot;성긴털/ncn+제비꽃/ncn+은/jxc&quot;     
-##  [2] &quot;성긴털/ncn+제비꽃/ncn+은/ncn&quot;     
-##  [3] &quot;성긴털/ncn+제비꽃/ncn+은/ncn&quot;     
-##  [4] &quot;성긴털/ncn+제비꽃/ncn+은/jcs&quot;     
-##  [5] &quot;성긴털/ncn+제비/ncn+꽃/ncn+은/jxc&quot;
-##  [6] &quot;성긴털/ncn+제비/ncn+꽃/ncn+은/jcs&quot;
-##  [7] &quot;성긴털/ncn+제비/ncn+꽃/ncn+은/jxc&quot;
-##  [8] &quot;성긴털/ncn+제비/ncn+꽃/ncn+은/jcs&quot;
-##  [9] &quot;성긴털/ncn+제비/ncn+꽃/ncn+은/jxc&quot;
-## [10] &quot;성긴털/ncn+제비/ncn+꽃/ncn+은/jcs&quot;
-## [11] &quot;성긴털/ncn+제비/ncn+꽃/ncn+은/jxc&quot;
-## [12] &quot;성긴털/ncn+제비/ncn+꽃/ncn+은/jcs&quot;
+## [1] &quot;성긴털/ncn+제비꽃/ncn+은/jxc&quot;      &quot;성긴털/ncn+제비꽃/ncn+은/ncn&quot;     
+## [3] &quot;성긴털/ncn+제비꽃/ncn+은/jcs&quot;      &quot;성긴털/ncn+제비/ncn+꽃/ncn+은/jxc&quot;
+## [5] &quot;성긴털/ncn+제비/ncn+꽃/ncn+은/jcs&quot;
 ## 
 ## $너무
 ## [1] &quot;너무/mag&quot;
@@ -394,7 +378,7 @@ MorphAnalyzer(&quot;성긴털제비꽃은 너무 예쁘다.&quot;)
 ## [1] &quot;예쁘/paa+다/ef&quot;
 ## 
 ## $.
-## [1] &quot;./sf&quot; &quot;./sy&quot; &quot;./sf&quot;</code></pre>
+## [1] &quot;./sf&quot; &quot;./sy&quot;</code></pre>
 </div>
 <div id="builddictionary" class="section level2">
 <h2>buildDictionary</h2>
@@ -423,33 +407,86 @@ extractNoun(txt)
 <div id="use-builddictionary-for-mergeuserdic-mergeuserdic-is-deprecated" class="section level2">
 <h2>Use buildDictionary for mergeUserDic (mergeUserDic is deprecated)</h2>
 <p>Function can be usually used for appending new terms to user dictionary.</p>
-<pre><code>useSystemDic()
+<pre><code>#Rather than simply using the system dictionary, 
+#it is better to extract nouns based on the rich vocabulary of the Korean dictionary(wooromalsam).
+buildDictionary(ext_dic = &quot;woorimalsam&quot;)
 
-## Backup was just finished!
-## 283949 words dictionary was built.
+## 629897 words dictionary was built.
 
-buildDictionary(ext_dic = &quot;&quot;,user_dic = data.frame(&quot;삼성전자&quot;, &quot;ncn&quot;), replace_usr_dic = T)
+extractNoun(&quot;할리우드 톱스타 레오나르도 디카프리오는 '선행 전도사'다운 행보를 이어갔다.&quot;)
 
-## 283950 words dictionary was built.
+##  [1] &quot;할리우드&quot;   &quot;톱스타&quot;     &quot;레오나르도&quot; &quot;디카&quot;       &quot;프리&quot;      
+##  [6] &quot;오&quot;         &quot;선행&quot;       &quot;전도사&quot;     &quot;다운&quot;       &quot;행보&quot;      
+## [11] &quot;이&quot;
 
-extractNoun(&quot;삼성전자에서는 아이폰에 대항할 무기를 준비하고 있다.&quot;)
+buildDictionary(ext_dic = &quot;woorimalsam&quot;, user_dic=data.frame(&quot;디카프리오&quot;, &quot;ncn&quot;),replace_usr_dic = T)
 
-## [1] &quot;삼성&quot;     &quot;전자&quot;     &quot;아이폰에&quot; &quot;대항&quot;     &quot;무기&quot;     &quot;준비&quot;
+## 629898 words dictionary was built.
 
-buildDictionary(ext_dic = &quot;&quot;,user_dic=data.frame(&quot;아이폰&quot;, &quot;ncn&quot;),replace_usr_dic = F)
+extractNoun(&quot;할리우드 톱스타 레오나르도 디카프리오는 '선행 전도사'다운 행보를 이어갔다.&quot;)
 
-## 283951 words dictionary was built.
-
-extractNoun(&quot;삼성전자에서는 아이폰에 대항할 무기를 준비하고 있다.&quot;)
-
-## [1] &quot;삼성전자&quot; &quot;아이폰에&quot; &quot;대항&quot;     &quot;무기&quot;     &quot;준비&quot;
+## [1] &quot;할리우드&quot;   &quot;톱스타&quot;     &quot;레오나르도&quot; &quot;디카프리오&quot; &quot;선행&quot;      
+## [6] &quot;전도사&quot;     &quot;다운&quot;       &quot;행보&quot;       &quot;이&quot;
 
 # get dictionary as data.frame
 head(get_dictionary('user_dic'))
 
-##       term tag
-## 1 삼성전자 ncn
-## 2   아이폰 ncn</code></pre>
+##         term tag
+## 1 디카프리오 ncn</code></pre>
+</div>
+<div id="auto-spacing" class="section level2">
+<h2>Auto-spacing</h2>
+<p>Sometimes it is necessary to analyze sentences that are not spatially separated. In this case, automatic spacing is provided.</p>
+<pre><code>## Backup was just finished!
+## 283949 words dictionary was built.
+
+extractNoun(&quot;아버지가방에들어가셨다.&quot;)
+
+## [1] &quot;아버지가방에들어가셨다&quot;
+
+extractNoun(&quot;아버지가방에들어가셨다.&quot;, autoSpacing = T)
+
+## [1] &quot;아버지&quot; &quot;방&quot;
+
+MorphAnalyzer(&quot;아버지가방에들어가셨다.&quot;, autoSpacing = T)
+
+## $아버지가
+## [1] &quot;아버지/ncn+가/jcc&quot; &quot;아버지/ncn+가/jcs&quot;
+## 
+## $방에
+## [1] &quot;방/nbu+에/jca&quot; &quot;방/ncn+에/jca&quot;
+## 
+## $들어가
+## [1] &quot;들/pvg+어/ecx+가/px+아/ecs&quot; &quot;들/pvg+어/ecx+가/px+아/ecx&quot;
+## [3] &quot;들/pvg+어/ecx+가/px+아/ef&quot;  &quot;듣/pvg+어/ecx+가/px+아/ecs&quot;
+## [5] &quot;듣/pvg+어/ecx+가/px+아/ecx&quot; &quot;듣/pvg+어/ecx+가/px+아/ef&quot; 
+## [7] &quot;들어가/pvg+아/ecs&quot;          &quot;들어가/pvg+아/ecx&quot;         
+## [9] &quot;들어가/pvg+아/ef&quot;          
+## 
+## $셨다
+## [1] &quot;시/paa+었/ep+다/ef&quot;
+## 
+## $.
+## [1] &quot;./sf&quot; &quot;./sy&quot;
+
+#SimplePos09(&quot;아버지가방에들어가셨다.&quot;, autoSpacing = T)
+
+SimplePos22(&quot;아버지가방에들어가셨다.&quot;, autoSpacing = T)
+
+## $아버지가
+## [1] &quot;아버지/NC+가/JC&quot;
+## 
+## $방에
+## [1] &quot;방/NC+에/JC&quot;
+## 
+## $들어가
+## [1] &quot;들/PV+어/EC+가/PX+아/EC&quot;
+## 
+## $셨다
+## [1] &quot;시/PA+었/EP+다/EF&quot;
+## 
+## $.
+## [1] &quot;./SF&quot;</code></pre>
 </div>
 </div>
 <div id="examples" class="section level1">
