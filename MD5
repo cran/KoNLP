@@ -1,4 +1,4 @@
-7739fba3a94041f1ebba441d86144146 *DESCRIPTION
+58b64a0e256e9c2d7baebe5f1b4ff2c0 *DESCRIPTION
 d4bd11fdeee51268a12f42ed9cc5d5b9 *NAMESPACE
 dedc2ad32e1ad1362fb2a2a8fce9cf8f *NEWS
 4d4899d91ad6c5af3e37edf8954feda2 *R/Concordances.R
@@ -8,7 +8,7 @@ e0c5720ea6b605871523b21c11557ac8 *R/koAnalyzerRun.R
 45e489ddb1531016b107584d52725769 *R/onLoad.R
 f668c4d7d3604dcccf3fd295c80d4866 *R/sysdata.rda
 4a9652b48d4364f82bcc2f0279131d5b *R/tagdata.R
-9e064d4107060d5e042d829c19142874 *R/utils.R
+3b272df79929c8315ce4fcfcb6586580 *R/utils.R
 6772d70a8285f12fcf6479b6ab1f4677 *build/vignette.rds
 f668c4d7d3604dcccf3fd295c80d4866 *data/tagdata.rda
 86171e6bb2fa59c39e2f08970174aba1 *inst/doc/KoNLP-API.Rmd
